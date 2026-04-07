@@ -3,46 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luskas TECH | Inovação Digital</title>
+    <title>Luskas TECH | Premium Digital Experience</title>
+    <!-- FontAwesome Original para os ícones funcionarem -->
     <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Google Fonts: Inter -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #0a0a0a;
+            --bg: #050505;
             --accent: #007AFF;
-            --text: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --accent-glow: rgba(0, 122, 255, 0.3);
+            --text-main: #ffffff;
+            --text-dim: #a1a1a6;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            color: var(--text-main);
+            line-height: 1.5;
             overflow-x: hidden;
         }
 
-        /* Animação de Entrada */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition);
+        /* Efeito de background mesh */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, #1a1a1a 0%, var(--bg) 80%);
+            z-index: -1;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Navbar */
+        /* Navbar Refinada */
         nav {
-            padding: 2rem 10%;
+            padding: 1.5rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,18 +54,22 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--accent);
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-transform: uppercase;
         }
 
-        /* Hero Section */
+        .logo span { color: var(--accent); }
+
+        /* Hero Section com Animação Fluida */
         .hero {
             height: 100vh;
             display: flex;
@@ -70,146 +78,195 @@
             align-items: center;
             text-align: center;
             padding: 0 10%;
-            background: radial-gradient(circle at center, #111 0%, #0a0a0a 100%);
         }
 
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #fff, #888);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #fff 0%, #666 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        /* Grid de Projetos */
-        .projects {
-            padding: 100px 10%;
-        }
-
-        .section-title {
-            font-size: 2rem;
+            color: var(--text-dim);
+            max-width: 700px;
             margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: var(--text-main);
+            color: var(--bg);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--text-main);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-main);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Portfolio Grid */
+        .projects {
+            padding: 140px 10%;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
             text-align: center;
         }
 
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header p { color: var(--text-dim); }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             transition: var(--transition);
             text-decoration: none;
             color: inherit;
-            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, var(--accent-glow), transparent);
+            opacity: 0;
+            transition: var(--transition);
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-12px);
             border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.06);
         }
 
+        .card:hover::before { opacity: 1; }
+
         .card i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--accent);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            display: block;
         }
 
         .card h3 {
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 600;
         }
 
         .card p {
-            color: #888;
-            font-size: 0.9rem;
+            color: var(--text-dim);
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
-        /* Footer */
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         footer {
-            padding: 50px 10%;
+            padding: 80px 10% 40px;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: #555;
         }
 
-        /* Responsividade */
+        footer p { color: #444; font-size: 0.9rem; }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            nav { padding: 1.5rem 5%; }
+            .hero { padding: 0 5%; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">LUSKAS TECH</div>
+        <div class="logo">Luskas<span>TECH</span></div>
+        <a href="#portfolio" class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Projetos</a>
     </nav>
 
     <section class="hero">
-        <h1 class="reveal">Transformando ideias em código.</h1>
-        <p class="reveal">Soluções digitais minimalistas, eficientes e focadas na experiência do usuário.</p>
+        <h1 class="reveal">Minimalismo.<br>Performance. Tecnologia.</h1>
+        <p class="reveal">Desenvolvemos experiências digitais de alto impacto com foco em engenharia de software moderna.</p>
+        <div class="reveal" style="transition-delay: 0.2s;">
+            <a href="#portfolio" class="btn-primary">Ver Portfólio</a>
+        </div>
     </section>
 
     <section class="projects" id="portfolio">
-        <h2 class="section-title reveal">Projetos em Destaque</h2>
+        <div class="section-header reveal">
+            <h2>Ecossistema</h2>
+            <p>Soluções escaláveis hospedadas na Vercel.</p>
+        </div>
+        
         <div class="grid">
-            
             <a href="https://luskas-hub.vercel.app" target="_blank" class="card reveal">
-                <i class="fas fa-layer-group"></i>
+                <i class="fa-solid fa-compass"></i>
                 <h3>Luskas HUB</h3>
-                <p>Central de ferramentas e conexões integradas para produtividade máxima.</p>
+                <p>O epicentro da sua produtividade. Centralização inteligente de fluxos de trabalho.</p>
             </a>
 
-            <a href="https://luskas-calc.vercel.app" target="_blank" class="card reveal">
-                <i class="fas fa-calculator"></i>
+            <a href="https://luskas-calc.vercel.app" target="_blank" class="card reveal" style="transition-delay: 0.1s;">
+                <i class="fa-solid fa-microchip"></i>
                 <h3>Luskas CALC</h3>
-                <p>Calculadora inteligente com interface fluida e precisão matemática avançada.</p>
+                <p>Processamento de dados em tempo real com interface reativa e minimalista.</p>
             </a>
 
-            <a href="https://luskas-pay.vercel.app" target="_blank" class="card reveal">
-                <i class="fas fa-credit-card"></i>
+            <a href="https://luskas-pay.vercel.app" target="_blank" class="card reveal" style="transition-delay: 0.2s;">
+                <i class="fa-solid fa-vault"></i>
                 <h3>Luskas PAY</h3>
-                <p>Simulador e ecossistema de pagamentos focado em agilidade e segurança.</p>
+                <p>Segurança e velocidade em transações financeiras digitais de ponta a ponta.</p>
             </a>
-
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Luskas TECH. Design by luskasdev.</p>
+        <p>&copy; 2024 Luskas TECH. Engineered for the future.</p>
     </footer>
 
     <script>
-        // Função para revelar elementos ao rolar a página
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const reveal = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < window.innerHeight - 100) {
+                    el.classList.add("active");
                 }
-            }
-        }
+            });
+        };
 
         window.addEventListener("scroll", reveal);
-        // Disparar uma vez no carregamento
-        reveal();
+        window.addEventListener("load", reveal);
     </script>
 </body>
 </html>
